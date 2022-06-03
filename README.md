@@ -74,7 +74,7 @@ Chaque instruction crée une couche :
 
 ### Construire l'image et la lancer
 
-Pour construire l'image : ```bash docker build --tag mywrapper .```
+Pour construire l'image : ```bash docker build --tag mywrapper .``` <br>
 Pour la lancer localement : ```bash docker run -p 5000:5000 --env LAT="5.902785" --env LONG="102.754175" --env APIKEY=$APIKEY --rm mywrapper```
 
 ## Mise de l'image à disposition sur le DockerHub
