@@ -14,7 +14,7 @@ app.config.from_object('config.Config')
 def home():
     html = """
            <h1>Sunrise-sunset API</h1>
-           <p>Example RESTful API built using Flask</p>
+           <p>Example RESTful API built using Flask and Docker</p>
            """
     return html
 
