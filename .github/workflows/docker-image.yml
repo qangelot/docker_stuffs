@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag api:$(date +%s)
+    -
+      name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        registry: qangelot/tpdevops2
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
