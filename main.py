@@ -1,16 +1,54 @@
-import requests
-import os
-from dotenv import load_dotenv
+from flask import request, jsonify, Flask
+import os, requests
 
-# docker run -p 5000:5000 --env LAT="5.902785" --env LONG="102.754175" --env APIKEY=$APIKEY --rm mywrapper
-# docker run --env LAT="5.902785" --env LONG="102.754175" --env API_KEY=$APIKEY  qangelot/tpdevops
+# docker ne copie pas le .env, on le passe dans la commande:
+# export APIKEY=MYAPIKEY
+# docker run -p 5000:5000 --env APIKEY=$APIKEY --rm myapi
 
-load_dotenv()
-APIKEY = os.environ['APIKEY']  # reads the environment variable
-LAT = os.environ['LAT']  # reads the environment variable
-LONG = os.environ['LONG']  # reads the environment variable
+app = Flask(__name__)
+app.config["DEBUG"] = True
+app.config.from_object('config.Config')
 
-response = requests.get("https://api.openweathermap.org/data/2.5/weather?lat=" + LAT + "&lon=" + LONG + "&appid=" + APIKEY + "&units=metric")
 
-print(response.status_code)
-print(response.json())
+@app.route('/', methods=['GET'])
+def home():
+    html = """
+           <h1>Sunrise-sunset API</h1>
+           <p>Example RESTful API for the course Lab. of Cloud Computing, Big Data and security @ UniCatt</p>
+           """
+    return html
+
+
+@app.route('/api/<city>', methods=['GET'])
+def api(city):
+    output = {}
+    if city:
+        output = {
+            'sunrise': 1,
+            'sunset': 2,
+            'city': city
+        }
+    return jsonify(output)
+
+@app.route('/api/daylight/<city>', methods=['GET'])
+def api_daylight(city):
+    output = {}
+    uri = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={app.config['APIKEY']}"
+    print(uri)
+    res = requests.get(uri)
+    if res.status_code == 200:
+        data = res.json()
+        sunrise = data['sys']['sunrise']
+        sunset = data['sys']['sunset']
+        output = {
+            'sunrise': sunrise,
+            'sunset': sunset,
+            'daylight': sunset-sunrise,
+            'city': city            
+        }
+    return output
+
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')
+    # host='0.0.0.0' -> accept connection from every host (to connect through a Docker virtual network)
