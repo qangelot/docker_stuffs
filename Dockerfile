@@ -1,6 +1,6 @@
 FROM python:3.8-buster
 
-WORKDIR /tp1_
+WORKDIR /tp2
 
 COPY requirements.txt .
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "main.py"]
+CMD ["python", "app.py"]
