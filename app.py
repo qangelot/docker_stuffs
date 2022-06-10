@@ -14,7 +14,7 @@ app.config.from_object('config.Config')
 def home():
     html = """
            <h1>Sunrise-sunset API</h1>
-           <p>Example RESTful API for the course Lab. of Cloud Computing, Big Data and security @ UniCatt</p>
+           <p>Example RESTful API built using Flask</p>
            """
     return html
 
