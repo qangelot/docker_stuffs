@@ -8,9 +8,6 @@ import os, requests
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config.from_object('config.Config')
-# reads the environment variables
-LAT = os.environ['LAT']  
-LONG = os.environ['LONG']
 
 
 @app.route('/', methods=['GET'])
@@ -30,6 +27,9 @@ def home():
 
 @app.route('/api/daylight/', methods=['GET'])
 def api_daylight():
+    # reads the environment variables
+    LAT = os.environ['LAT']  
+    LONG = os.environ['LONG']
     output = {}
     uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
     print(uri)
@@ -49,6 +49,9 @@ def api_daylight():
 
 @app.route('/api/weather/', methods=['GET'])
 def api_weather():
+    # reads the environment variables
+    LAT = os.environ['LAT']  
+    LONG = os.environ['LONG']
     output = {}
     uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
     print(uri)
