@@ -49,9 +49,9 @@ def api_daylight():
 
 @app.route('/api/weather/', methods=['GET'])
 def api_weather():
-    # reads the environment variables
-    LAT = os.environ['LAT']  
-    LONG = os.environ['LONG']
+    # get parameters
+    LAT = request.args.get('lat')
+    LONG = request.args.get('lon')  
     output = {}
     uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
     print(uri)
