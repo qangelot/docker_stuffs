@@ -2,8 +2,7 @@ from flask import request, jsonify, Flask
 import os, requests
 
 
-# docker ne copie pas le .env, on le passe dans la commande:
-# export APIKEY=MYAPIKEY
+# docker ne copie pas le .env, on le passe dans la commande: export APIKEY=MYAPIKEY
 # docker run -p 5000:5000 --env APIKEY=$APIKEY --rm myapi
 
 app = Flask(__name__)
