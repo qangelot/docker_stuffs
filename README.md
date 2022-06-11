@@ -110,7 +110,10 @@ def api_weather():
 ```
 
 Puis on construit l'appel à l'API Openweather, en utilisant les variables passées dans l'environnement et notre clé d'API stockée dans les secrets DockerHub:
-``` 
+```python
+LAT = request.args.get('lat')
+LONG = request.args.get('lon')  
+output = {}
 uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
 res = requests.get(uri)
 ```
