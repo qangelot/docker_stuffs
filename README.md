@@ -36,7 +36,9 @@ Nous y accédons dans le code par le biais de la méthode ```python load_dotenv(
 Nous récupérons les autres variables d'environnements (LAT, LONG) qui seront passées dans la commande ```bash docker run``` de la même façon.
 
 Ensuite, nous construisons la requête auprès de l'API graĉe à la libraire requests :
-```python response = requests.get("https://api.openweathermap.org/data/2.5/weather?lat=" + LAT + "&lon=" + LONG + "&appid=" + APIKEY + "&units=metric") ```
+```python 
+response = requests.get("https://api.openweathermap.org/data/2.5/weather?lat=" + LAT + "&lon=" + LONG + "&appid=" + APIKEY + "&units=metric") 
+```
 
 Enfin, nous collectons la réponse : 
 - son statut : ```python response.status_code ```
