@@ -48,7 +48,6 @@ def api_daylight():
     return jsonify(output)
 
 
-# test this route and redeploy then test with docker pull and params
 @app.route('/api/weather/', methods=['GET'])
 def api_weather():
     output = {}
