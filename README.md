@@ -6,9 +6,8 @@ programmation python.
 
 Ensuite nous allons packager ce code dans une image Docker puis la mettre à disposition son image sur DockerHub.
 
-## Quelques supports utiles sur Docker
+## Quelques supports utiles 
 
-- https://mldv.it/home/posts/lectures/restapi-python-docker-2020/
 - https://pypi.org/project/python-dotenv/ 
 - https://lucasvidelaine.wordpress.com/2018/01/29/utilisation-de-dockerhub/
 
@@ -21,11 +20,11 @@ Au vu de la polyvalence et de la simplicité de Python, c'est le langage que j'a
 
 Afin d'isoler l'environnement de développement de celui de production, nous créons un environnement virtuel : 
 
-```bash python3 -m venv myvenv```
+``` python3 -m venv myvenv```
 
 Nous pouvons ainsi y installer les packages nécessaires puis les collecter dans un fichier .txt pour ensuite les installer dans le conteneur Docker :
 
-```bash pip freeze -> requirements.txt```
+``` pip freeze -> requirements.txt```
 
 ## Code python
 
@@ -46,7 +45,7 @@ Enfin, nous collectons la réponse :
 
 ### Dockerfile 
 
-```bash
+```
 FROM python:3.8-buster
 
 WORKDIR /tp1_
@@ -74,17 +73,17 @@ Chaque instruction crée une couche :
 
 ### Construire l'image et la lancer
 
-Pour construire l'image : ```bash docker build --tag mywrapper .``` <br>
-Pour la lancer localement : ```bash docker run -p 5000:5000 --env LAT="5.902785" --env LONG="102.754175" --env APIKEY=$APIKEY --rm mywrapper```
+Pour construire l'image : ``` docker build --tag mywrapper .``` <br>
+Pour la lancer localement : ``` docker run -p 5000:5000 --env LAT="5.902785" --env LONG="102.754175" --env APIKEY=$APIKEY --rm mywrapper```
 
 ## Mise de l'image à disposition sur le DockerHub
 
-- On récupère l'id de l'image : ```bash docker images ```
-- On se connecte au DockerHub : ```bash docker login --username=qangelot```
-- On tag l'image : ```bash docker tag 3b14e019997f qangelot/tpdevops```
-- On pousse l'image : ```bash docker push qangelot/tpdevops ```
-- On la récupère : ```bash docker pull qangelot/tpdevops```
-- On la run : ```bash docker run --env LAT="5.902785" --env LONG="102.754175" --env API_KEY=$APIKEY  qangelot/tpdevops```
+- On récupère l'id de l'image : ``` docker images ```
+- On se connecte au DockerHub : ``` docker login --username=qangelot```
+- On tag l'image : ``` docker tag 3b14e019997f qangelot/tpdevops```
+- On pousse l'image : ``` docker push qangelot/tpdevops ```
+- On la récupère : ``` docker pull qangelot/tpdevops```
+- On la run : ``` docker run --env LAT="5.902785" --env LONG="102.754175" --env API_KEY=$APIKEY  qangelot/tpdevops```
 
 
 
