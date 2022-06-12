@@ -17,8 +17,8 @@ def home():
            <p>RESTful API made to provide infos about the weather to the end user.
            <br> Usage:
            <ul>
-            <li> /api/daylight/'city_name': get daylight infos about the provided LAT/LONG couple</li>
-            <li> /api/weather/: get weather infos about the provided LAT/LONG couple</li>
+            <li> /api/daylight/: get daylight infos about the provided LAT/LONG couple (as env variables)</li>
+            <li> /api/weather/?lat=52.754175&lon=5.902785: get weather infos about the provided LAT/LONG couple (as parameters in URL) </li>
            </ul>
            </p>
            """
