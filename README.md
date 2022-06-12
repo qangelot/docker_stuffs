@@ -162,4 +162,12 @@ Ici, on a recours à des Github Actions de la marketplace, car très standard : 
 
 Nous avons ainsi construit un pipeline d'intégration continue qui, à chaque nouveau push de code, va construire une image Docker à partir de notre API Flask mise à jour et la publier sur le DockerHub. L'étape suivante est d'intégrer des tests à ce pipeline.
 
+## Usage
+
+Après avoir pull l'image sur le DockerHub, il faut lancer l'image en local et ouvrir un second terminal où exécuter une commande curl.
+
+```docker run --network host --env APIKEY=$APIKEY qangelot/tpdevops2```
+```curl "http://localhost:5000/api/weather/?lat=5.902785&lon=102.754175"```
+
+
 
