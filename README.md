@@ -137,7 +137,7 @@ if res.status_code == 200:
 
 ## Configuration des Github Actions
 
-Pour cela, on stock nos secrets nécessaires à la connexion au DockerHub dans le repository github concerné.
+Pour cela, on stock nos secrets nécessaires à la connexion au DockerHub dans le repository github concerné. Attention à ne pas stocker le password DockerHub, il faut générer un token d'accés sur DockerHub spécifiquement pour cela.
 
 Ensuite on rédige un fichier YAML de configuration de la CI pipeline:
 - on nomme la pipeline,
