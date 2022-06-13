@@ -109,7 +109,7 @@ Ensuite, on peut aisément construire un endpoint de notre API grâce à un déc
 def api_weather():
 ```
 
-Puis on construit l'appel à l'API Openweather, en utilisant les variables passées dans l'environnement et notre clé d'API stockée dans les secrets DockerHub:
+Puis on construit l'appel à l'API Openweather, en utilisant les variables passées dans l'environnement et notre clé d'API :
 ```python
 LAT = request.args.get('lat')
 LONG = request.args.get('lon')  
