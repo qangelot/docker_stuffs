@@ -27,7 +27,7 @@ def home():
 @app.route('/api/daylight/', methods=['GET'])
 def api_daylight(): 
     # get parameters
-    LAT = requests.args.get('lat')
+    LAT = request.args.get('lat')
     LONG = request.args.get('lon')  
     
     output = {}
@@ -48,7 +48,7 @@ def api_daylight():
 @app.route('/api/weather/', methods=['GET'])
 def api_weather():
     # get parameters
-    LAT = requests.args.get('lat')
+    LAT = request.args.get('lat')
     LONG = request.args.get('lon')  
     
     output = {}
