@@ -1,9 +1,8 @@
-from flask import request, jsonify, Flask
+from flask import jsonify, Flask
 import os, requests
+from datetime import datetime
 
 
-# docker ne copie pas le .env, on le passe dans la commande: export APIKEY=MYAPIKEY
-# docker run -p 5000:5000 --env APIKEY=$APIKEY --rm myapi
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -28,7 +27,7 @@ def home():
 @app.route('/api/daylight/', methods=['GET'])
 def api_daylight(): 
     # get parameters
-    LAT = request.args.get('lat')
+    LAT = requests.args.get('lat')
     LONG = request.args.get('lon')  
     
     output = {}
@@ -49,7 +48,7 @@ def api_daylight():
 @app.route('/api/weather/', methods=['GET'])
 def api_weather():
     # get parameters
-    LAT = request.args.get('lat')
+    LAT = requests.args.get('lat')
     LONG = request.args.get('lon')  
     
     output = {}
