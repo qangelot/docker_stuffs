@@ -27,11 +27,13 @@ def home():
 
 @app.route('/api/daylight/', methods=['GET'])
 def api_daylight(): 
+    # get parameters
+    LAT = request.args.get('lat')
+    LONG = request.args.get('lon')  
+    
     output = {}
-    uri = f"http://api.openweathermap.org/data/2.5/weather?lat={app.config['LAT']}&lon={app.config['LONG']}&appid={app.config['APIKEY']}&units=metric"
-    print(uri)
+    uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
     res = requests.get(uri)
-    print(res)    
     if res.status_code == 200:
         data = res.json()
         sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
@@ -49,11 +51,10 @@ def api_weather():
     # get parameters
     LAT = request.args.get('lat')
     LONG = request.args.get('lon')  
+    
     output = {}
     uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
-    print(uri)
     res = requests.get(uri)
-    print(res)
     if res.status_code == 200:
         data = res.json()
         
