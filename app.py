@@ -1,7 +1,5 @@
 from flask import request, jsonify, Flask
 import os, requests
-from datetime import datetime
-
 
 
 app = Flask(__name__)
@@ -35,14 +33,14 @@ def api_daylight():
     res = requests.get(uri)
     if res.status_code == 200:
         data = res.json()
-        sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
-        sunset = datetime.fromtimestamp(data['sys']['sunset'])
+        sunrise = data['sys']['sunrise']
+        sunset = data['sys']['sunset']
         output = {
             'sunrise': sunrise,
             'sunset': sunset,
             'daylight': sunset-sunrise            
         }
-    return output
+    return jsonify(output)
 
 
 @app.route('/api/weather/', methods=['GET'])
