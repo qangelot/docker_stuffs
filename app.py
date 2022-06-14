@@ -17,8 +17,8 @@ def home():
            <p>RESTful API made to provide infos about the weather to the end user.
            <br> Usage:
            <ul>
-            <li> /api/daylight/: get daylight infos about the provided LAT/LONG couple (as env variables)</li>
-            <li> /api/weather/?lat=52.754175&lon=5.902785: get weather infos about the provided LAT/LONG couple (as parameters in URL) </li>
+            <li> /api/daylight/: get daylight infos about the provided LAT/LONG couple </li>
+            <li> /api/weather/: get weather infos about the provided LAT/LONG couple </li>
            </ul>
            </p>
            """
@@ -26,19 +26,16 @@ def home():
 
 
 @app.route('/api/daylight/', methods=['GET'])
-def api_daylight():
-    # reads the environment variables
-    LAT = os.environ['LAT']  
-    LONG = os.environ['LONG']
+def api_daylight(): 
     output = {}
-    uri = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LONG}&appid={app.config['APIKEY']}&units=metric"
+    uri = f"http://api.openweathermap.org/data/2.5/weather?lat={app.config['LAT']}&lon={app.config['LONG']}&appid={app.config['APIKEY']}&units=metric"
     print(uri)
     res = requests.get(uri)
     print(res)    
     if res.status_code == 200:
         data = res.json()
-        sunrise = data['sys']['sunrise']
-        sunset = data['sys']['sunset']
+        sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
+        sunset = datetime.fromtimestamp(data['sys']['sunset'])
         output = {
             'sunrise': sunrise,
             'sunset': sunset,
@@ -59,11 +56,21 @@ def api_weather():
     print(res)
     if res.status_code == 200:
         data = res.json()
+        
+        lat = data['coord']['lat']
+        long = data['coord']['lon']
+        weather = data['weather'][0]['main']
+        more_details = data['weather'][0]['description']
         temp = data['main']['temp']
         temp_feel = data['main']['feels_like']
         pressure = data['main']['pressure']
         humidity = data['main']['humidity']
+ 
         output = {
+            'latitude': lat,
+            'longitude': long,
+            'weather': weather,
+            'detailed': more_details,
             'actual temperature': temp,
             'feeling': temp_feel,
             'pressure': pressure,
