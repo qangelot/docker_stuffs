@@ -42,7 +42,7 @@ def api_daylight():
             'sunset': sunset,
             'daylight': sunset-sunrise            
         }
-    return jsonify(output)
+    return output
 
 
 @app.route('/api/weather/', methods=['GET'])
